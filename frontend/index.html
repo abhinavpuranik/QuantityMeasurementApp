@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="index.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantity Measurement</title>
+</head>
+<body>
+    <div id = "root">
+        <div class = "app-scroll-wrapper">
+            <header class = "main-header">
+                <h1>Welcome to quantity Measurement</h1>
+            </header>
+            <main class = "container">
+                <section class="selection-section">
+                    <h2>CHOOSE TYPE</h2>
+                    <div class = "category-grid" id="categoryGrid">
+                        <div class ="category-card" data-category="length">
+                            <div class="icon-box">
+                                <img src="https://img.icons8.com/color/50/ruler.png" alt="Length">
+                            </div>
+                            <h3>Length</h3>
+                        </div>
+
+                        <div class ="category-card" data-category="weight">
+                            <div class="icon-box">
+                                <img src="https://img.icons8.com/color/50/weight.png" alt="Weight">
+                            </div>
+                            <h3>Weight</h3>
+                        </div>
+
+                        <div class ="category-card" data-category="temperature">
+                            <div class="icon-box">
+                                <img src="https://img.icons8.com/color/50/temperature.png" alt="Temperature">
+                            </div>
+                            <h3>Temperature</h3>
+                        </div>
+                        <div class ="category-card" data-category="volume">
+                            <div class="icon-box">
+                                <img src="https://img.icons8.com/color/50/volume.png" alt="Volume">
+                            </div>
+                            <h3>Volume</h3>
+                        </div>
+                    </div>
+
+
+                    
+                </section>
+
+                <div class = "category-grid2" id="categoryGrid2">
+                     <section class = "selection-section">
+                    <h2>CHOOSE ACTION</h2>
+                    <div class = "action-section">
+                        <button class ="action-button" id = "button1">Conversion</button>
+                        <button class ="action-button" id = "button2">Comparison</button>
+                        <button class ="action-button" id = "button3">Arithmetic</button>
+                    </div>
+                </section>
+                </div>
+
+                <section class="conversion-section">
+                    <div class="input-group">
+                        <label for="">FROM</label>
+                        <input type="number" id="inputValue" placeholder="Enter value">
+                        <div class ="custom-dropdown">
+                            <div class="dropdown-header">
+                                <span>Kilometer</span>
+                                <span class = "arrow">▼</span>
+                            </div>
+                            <div class ="dropdown-options">
+                                <div class="option-item">Kilometer</div>
+                                <div class="option-item">Meter</div>
+                                <div class="option-item">Centimeter</div>
+                                <div class="option-item">Millimeter</div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+
+
+                <section class="conversion-section">
+                    <div class="input-group">
+                        <label for="">TO</label>
+                        <input type="number" id="inputValue" placeholder="Enter value">
+                        <div class ="custom-dropdown">
+                            <div class="dropdown-header">
+                                <span>Centimeter</span>
+                                <span class = "arrow">▼</span>
+                            </div>
+                            <div class ="dropdown-options">
+                                <div class="option-item">Kilometer</div>
+                                <div class="option-item">Meter</div>
+                                <div class="option-item">Centimeter</div>
+                                <div class="option-item">Millimeter</div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+
+
+               
+
+            </main>
+        </div>
+
+
+    </div>
+    
+</body>
+</html>
