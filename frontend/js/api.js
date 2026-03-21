@@ -25,7 +25,7 @@ export async function getConversion(from, to) {
 
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-        const data = await res.json(); // json-server always returns an array
+        const data = await res.json(); 
 
         if (!data.length) throw new Error(`No conversion found for ${from} → ${to}`);
 
@@ -34,6 +34,21 @@ export async function getConversion(from, to) {
     } catch (err) {
         console.error("getConversion failed:", err);
         throw err; // re-throw so caller can show error to user
+    }
+}
+
+
+export async function saveHistory(record) {
+    try{
+        const res = await fetch(`${BASE_URL}/history`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(record)
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    } catch(err) {
+        console.error("saveHistory failed:", err);
+        return null;
     }
 }
 
