@@ -1,4 +1,9 @@
-import { getUnits } from "./js/api.js";
+
+import { getUnits, getConversion, saveHistory, getHistory } from "./js/api.js";
+import { populateDropdown } from "./js/ui.js";
+
+// Expose state globally so ui.js can access it
+
 // Global state
 
 
@@ -11,6 +16,7 @@ const state = {
     toUnit: "",
     operator: "+"
 };
+window.appState = state; // make it globally accessible for ui.js
 
 document.addEventListener("DOMContentLoaded", async () => {
     attachEventListeners();
@@ -63,6 +69,16 @@ function attachEventListeners() {
     });
 }
 
+// async function loadUnits(type) {
+//     const units = await getUnits(type.toLowerCase());
+
+//     if (units.length === 0) {
+//         showError("No units found for this type.");
+//         return;
+//     }
+
+//     populateDropdown(units);
+// }
 async function loadUnits(type) {
     const units = await getUnits(type.toLowerCase());
 
@@ -71,39 +87,41 @@ async function loadUnits(type) {
         return;
     }
 
-    populateDropdown(units);
-}
-
-function populateDropdown(units) {
-    const dropdowns = document.querySelectorAll(".dropdown-options");
-    dropdowns.forEach(dropdown => {
-        dropdown.innerHTML = "";
-
-        units.forEach(unit => {
-            const div = document.createElement("div");
-            div.className = "option-item";
-            div.innerText = unit.label;
-            div.dataset.symbol = unit.symbol;
-
-            div.addEventListener("click", (e) => {
-                e.stopPropagation(); // prevent closing before state updates
-                // Update the visible header label
-                dropdown.previousElementSibling.querySelector("span").innerText = unit.label;
-
-                const label = dropdown.closest(".conversion-section").querySelector("label").innerText;
-                if (label === "FROM") {
-                    state.fromUnit = unit.symbol;
-                } else {
-                    state.toUnit = unit.symbol;
-                }
-
-                dropdown.classList.remove("show");
-            });
-
-            dropdown.appendChild(div);
-        });
+    document.querySelectorAll(".dropdown-options").forEach(selectEl => {
+        populateDropdown(selectEl, units);
     });
 }
+
+// function populateDropdown(units) {
+//     const dropdowns = document.querySelectorAll(".dropdown-options");
+//     dropdowns.forEach(dropdown => {
+//         dropdown.innerHTML = "";
+
+//         units.forEach(unit => {
+//             const div = document.createElement("div");
+//             div.className = "option-item";
+//             div.innerText = unit.label;
+//             div.dataset.symbol = unit.symbol;
+
+//             div.addEventListener("click", (e) => {
+//                 e.stopPropagation(); // prevent closing before state updates
+//                 // Update the visible header label
+//                 dropdown.previousElementSibling.querySelector("span").innerText = unit.label;
+
+//                 const label = dropdown.closest(".conversion-section").querySelector("label").innerText;
+//                 if (label === "FROM") {
+//                     state.fromUnit = unit.symbol;
+//                 } else {
+//                     state.toUnit = unit.symbol;
+//                 }
+
+//                 dropdown.classList.remove("show");
+//             });
+
+//             dropdown.appendChild(div);
+//         });
+//     });
+// }
 
 function setDefaultActive() {
     const firstCard = document.querySelector(".category-card");
