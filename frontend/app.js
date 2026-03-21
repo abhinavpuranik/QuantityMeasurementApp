@@ -1,4 +1,7 @@
+import { getUnits } from "./js/api.js";
 // Global state
+
+
 const state = {
     type: "Length",
     action: "Conversion",
@@ -12,7 +15,7 @@ const state = {
 document.addEventListener("DOMContentLoaded", async () => {
     attachEventListeners();
     setDefaultActive();
-    await loadUnits("Length");
+    await loadUnits("length");
     toggleOperators(false);
     await loadHistory();
 });
@@ -45,7 +48,7 @@ function attachEventListeners() {
 
             const selectedType = card.dataset.category;
             state.type = capitalize(selectedType);
-            await loadUnits(state.type);
+            await loadUnits(state.type.toLowerCase());
         });
     });
 
@@ -61,17 +64,14 @@ function attachEventListeners() {
 }
 
 async function loadUnits(type) {
-    try {
-        const res = await fetch(`http://localhost:3000/units`);
-        const data = await res.json();
+    const units = await getUnits(type.toLowerCase());
 
-        const filtered = data.filter(u => u.type.toLowerCase() === type.toLowerCase());
-        populateDropdown(filtered);
-
-    } catch (err) {
-        console.error("Error fetching units:", err);
-        showError("Server unavailable");
+    if (units.length === 0) {
+        showError("No units found for this type.");
+        return;
     }
+
+    populateDropdown(units);
 }
 
 function populateDropdown(units) {
