@@ -297,6 +297,36 @@ body {
     30%  { background-color: #cce5ff; }
     100% { background-color: #f0f7ff; }
 }
+#operator-selector {
+    display: none;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.operator-btn {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    background: #fff;
+    color: #007bff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.operator-btn:hover {
+    background: #007bff;
+    color: #fff;
+}
+
+.operator-btn.active {
+    background: #007bff;
+    color: #fff;
+    box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.3);
+}
 
 
 

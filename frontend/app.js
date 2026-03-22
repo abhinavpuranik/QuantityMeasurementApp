@@ -1,7 +1,8 @@
 
 import { getUnits, getConversion, saveHistory, getHistory } from "./js/api.js";
 //import { populateDropdown } from "./js/ui.js";
-import { populateDropdown, setActive, showResult } from "./js/ui.js";
+import { populateDropdown, setActive, showResult, toggleOperators } from "./js/ui.js";
+
 
 // Expose state globally so ui.js can access it
 
@@ -60,6 +61,13 @@ function attachEventListeners() {
         setActive(document.querySelector(".action-section"), button, ".action-button"); 
         state.action = button.innerText;
         toggleOperators(state.action === "Arithmetic");
+    });
+});
+
+    document.querySelectorAll(".operator-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+        setActive(document.querySelector("#operator-selector"), btn, ".operator-btn");
+        state.operator = btn.dataset.op;
     });
 });
 }
@@ -126,11 +134,11 @@ function setDefaultActive() {
     if (firstButton) setActive(document.querySelector(".action-section"), firstButton, ".action-button");
 }
 
-function toggleOperators(show) {
-    const operatorRow = document.querySelector(".operator-row");
-    if (!operatorRow) return;
-    operatorRow.style.display = show ? "flex" : "none";
-}
+// function toggleOperators(show) {
+//     const operatorRow = document.querySelector(".operator-row");
+//     if (!operatorRow) return;
+//     operatorRow.style.display = show ? "flex" : "none";
+// }
 
 async function loadHistory() {
     try {

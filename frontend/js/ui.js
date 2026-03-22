@@ -86,3 +86,14 @@ export function showResult(value, unitSymbol) {
     panel.classList.add("highlight");
     setTimeout(() => panel.classList.remove("highlight"), 1500);
 }
+
+export function toggleOperators(show) {
+    const el = document.querySelector("#operator-selector");
+
+    if (!el) {
+        console.warn("toggleOperators: #operator-selector not found");
+        return;
+    }
+
+    el.style.display = show ? "flex" : "none";
+}
