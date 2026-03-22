@@ -135,7 +135,21 @@ body {
 }
 
 
-.action-button:hover{
+.action-button:hover {
+    background-color: #5a8ec4;
+    transform: translateY(-3px);
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Active state for category cards */
+.category-card.active {
+    border-color: #007bff;
+    box-shadow: 0px 6px 16px rgba(0, 123, 255, 0.2);
+    background-color: #e6f0ff;
+}
+
+/* Active state for action buttons */
+.action-button.active {
     background-color: #28a745;
     transform: translateY(-5px);
     box-shadow: 0px 6px 16px rgba(0,0,0,0.15);
@@ -251,7 +265,6 @@ body {
     color: #ddd;
     pointer-events: none
 }
-
 
 
 

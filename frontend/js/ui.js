@@ -46,3 +46,17 @@ export function populateDropdown(selectEl, units) {
         selectEl.appendChild(div);
     });
 }
+
+export function setActive(parentEl, clickedEl, childSelector) {
+    // Exception flow: null parent
+    if (!parentEl) {
+        console.warn("setActive: parentEl is null");
+        return;
+    }
+
+    // Remove active from all siblings
+    parentEl.querySelectorAll(childSelector).forEach(el => el.classList.remove("active"));
+
+    // Set active on clicked
+    clickedEl.classList.add("active");
+}

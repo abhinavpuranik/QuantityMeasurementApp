@@ -1,6 +1,7 @@
 
 import { getUnits, getConversion, saveHistory, getHistory } from "./js/api.js";
-import { populateDropdown } from "./js/ui.js";
+//import { populateDropdown } from "./js/ui.js";
+import { populateDropdown, setActive } from "./js/ui.js";
 
 // Expose state globally so ui.js can access it
 
@@ -47,26 +48,20 @@ function attachEventListeners() {
         document.querySelectorAll(".dropdown-options").forEach(d => d.classList.remove("show"));
     });
 
-    document.querySelectorAll(".category-card").forEach(card => {
-        card.addEventListener("click", async () => {
-            document.querySelectorAll(".category-card").forEach(c => c.classList.remove("active"));
-            card.classList.add("active");
-
-            const selectedType = card.dataset.category;
-            state.type = capitalize(selectedType);
-            await loadUnits(state.type.toLowerCase());
-        });
+  document.querySelectorAll(".category-card").forEach(card => {
+    card.addEventListener("click", async () => {
+        setActive(document.querySelector("#categoryGrid"), card, ".category-card"); 
+        state.type = capitalize(card.dataset.category);
+        await loadUnits(card.dataset.category.toLowerCase());
     });
-
+});
     document.querySelectorAll(".action-button").forEach(button => {
-        button.addEventListener("click", () => {
-            document.querySelectorAll(".action-button").forEach(b => b.classList.remove("action-active"));
-            button.classList.add("action-active");
-
-            state.action = button.innerText;
-            toggleOperators(state.action === "Arithmetic");
-        });
+    button.addEventListener("click", () => {
+        setActive(document.querySelector(".action-section"), button, ".action-button"); 
+        state.action = button.innerText;
+        toggleOperators(state.action === "Arithmetic");
     });
+});
 }
 
 // async function loadUnits(type) {
@@ -126,8 +121,9 @@ async function loadUnits(type) {
 function setDefaultActive() {
     const firstCard = document.querySelector(".category-card");
     const firstButton = document.querySelector(".action-button");
-    if (firstCard) firstCard.classList.add("active");
-    if (firstButton) firstButton.classList.add("action-active"); // ✅ FIX 3: was "active"
+
+    if (firstCard) setActive(document.querySelector("#categoryGrid"), firstCard, ".category-card");
+    if (firstButton) setActive(document.querySelector(".action-section"), firstButton, ".action-button");
 }
 
 function toggleOperators(show) {
