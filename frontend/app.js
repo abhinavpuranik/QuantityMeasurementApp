@@ -1,7 +1,7 @@
 
 import { getUnits, getConversion, saveHistory, getHistory } from "./js/api.js";
 //import { populateDropdown } from "./js/ui.js";
-import { populateDropdown, setActive } from "./js/ui.js";
+import { populateDropdown, setActive, showResult } from "./js/ui.js";
 
 // Expose state globally so ui.js can access it
 

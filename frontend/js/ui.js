@@ -60,3 +60,29 @@ export function setActive(parentEl, clickedEl, childSelector) {
     // Set active on clicked
     clickedEl.classList.add("active");
 }
+
+export function showResult(value, unitSymbol) {
+    const valueEl = document.querySelector("#result-value");
+    const unitEl = document.querySelector("#result-unit");
+
+    if (!valueEl || !unitEl) {
+        console.warn("showResult: result elements not found in DOM");
+        return;
+    }
+
+    // Exception flow: null value
+    valueEl.textContent = value !== null && value !== undefined ? value : "—";
+
+    // Alternate flow: comparison mode passes empty string for unit
+    unitEl.textContent = unitSymbol ?? "";
+
+    // Highlight animation
+    const panel = document.querySelector("#resultPanel");
+    panel.classList.remove("highlight");
+
+    // Force reflow so animation replays even if triggered twice in a row
+    void panel.offsetWidth;
+
+    panel.classList.add("highlight");
+    setTimeout(() => panel.classList.remove("highlight"), 1500);
+}

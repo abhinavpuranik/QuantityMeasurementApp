@@ -266,5 +266,37 @@ body {
     pointer-events: none
 }
 
+.result-panel {
+    margin-top: 40px;
+    padding: 30px;
+    background: #f0f7ff;
+    border: 2px solid #007bff;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#result-value {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #007bff;
+}
+
+#result-unit {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #444;
+    margin-left: 10px;
+}
+
+.result-panel.highlight {
+    animation: highlightPulse 1.5s ease;
+}
+
+@keyframes highlightPulse {
+    0%   { background-color: #f0f7ff; }
+    30%  { background-color: #cce5ff; }
+    100% { background-color: #f0f7ff; }
+}
+
 
 
