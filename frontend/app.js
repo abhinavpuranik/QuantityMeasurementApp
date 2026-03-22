@@ -1,7 +1,8 @@
 
 import { getUnits, getConversion, saveHistory, getHistory } from "./js/api.js";
 //import { populateDropdown } from "./js/ui.js";
-import { populateDropdown, setActive, showResult, toggleOperators } from "./js/ui.js";
+import { populateDropdown, setActive, showResult, toggleOperators, renderHistory } from "./js/ui.js";
+
 
 
 // Expose state globally so ui.js can access it
@@ -141,13 +142,8 @@ function setDefaultActive() {
 // }
 
 async function loadHistory() {
-    try {
-        const res = await fetch("http://localhost:3000/history");
-        const history = await res.json();
-        console.log("History:", history);
-    } catch (err) {
-        console.error("History load failed:", err);
-    }
+    const history = await getHistory();
+    renderHistory(history);
 }
 
 function showError(msg) {

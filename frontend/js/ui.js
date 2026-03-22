@@ -97,3 +97,29 @@ export function toggleOperators(show) {
 
     el.style.display = show ? "flex" : "none";
 }
+
+export function renderHistory(records) {
+    const list = document.querySelector("#history-list");
+
+    if (!list) {
+        console.warn("renderHistory: #history-list not found");
+        return;
+    }
+
+    // Exception flow: undefined treated as []
+    const safeRecords = records ?? [];
+
+    list.innerHTML = "";
+
+    // Alternate flow: empty array
+    if (!safeRecords.length) {
+        list.innerHTML = "<li>No history yet.</li>";
+        return;
+    }
+
+    safeRecords.forEach(r => {
+        const li = document.createElement("li");
+        li.textContent = `${r.expression}  =  ${r.result}  (${new Date(r.timestamp).toLocaleString()})`;
+        list.appendChild(li);
+    });
+}

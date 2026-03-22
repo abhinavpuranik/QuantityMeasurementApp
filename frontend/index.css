@@ -328,5 +328,36 @@ body {
     box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.3);
 }
 
+.history-panel {
+    margin-top: 40px;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+}
+
+.history-panel h3 {
+    font-size: 1.1rem;
+    color: #444;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+#history-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#history-list li {
+    padding: 10px 15px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: #555;
+    border-left: 3px solid #007bff;
+}
+
 
 
