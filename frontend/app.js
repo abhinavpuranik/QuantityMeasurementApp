@@ -75,6 +75,7 @@ function attachEventListeners() {
             setActive(actionSelector, button, ".action-button");
             state.action = button.innerText;
             toggleOperators(state.action === "Arithmetic");
+            showResult(null, "");
         });
     });
 
