@@ -25,14 +25,10 @@ export function populateDropdown(selectEl, units) {
         div.className = "option-item";
         div.textContent = `${u.label} (${u.symbol})`;
         div.dataset.symbol = u.symbol;
-
         div.addEventListener("click", (e) => {
             e.stopPropagation();
-
-            // Update header label
             selectEl.previousElementSibling.querySelector("span").innerText = u.label;
 
-            // Update state based on FROM or TO
             const label = selectEl.closest(".conversion-section").querySelector("label").innerText;
             if (label === "FROM") {
                 window.appState.fromUnit = u.symbol;
@@ -41,8 +37,10 @@ export function populateDropdown(selectEl, units) {
             }
 
             selectEl.classList.remove("show");
-        });
-
+    
+    // ✅ Trigger recalculation after unit change
+            if (typeof window.calculate === "function") window.calculate();
+});
         selectEl.appendChild(div);
     });
 }

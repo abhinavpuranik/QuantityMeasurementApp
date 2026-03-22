@@ -1,5 +1,6 @@
 import { getUnits, getConversion, saveHistory, getHistory } from "./js/api.js";
 import { populateDropdown, setActive, showResult, toggleOperators, renderHistory } from "./js/ui.js";
+import { applyConversion, compareValues, performArithmetic } from "./js/conversion.js";;
 
 const state = {
     type: "length",
@@ -10,7 +11,8 @@ const state = {
     toUnit: "",
     operator: "+"
 };
-window.appState = state;
+// window.appState = state;
+// window.calculate = calculate;
 
 // ✅ Cache DOM references once
 const typeSelector = document.querySelector("#categoryGrid");
@@ -26,6 +28,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     await loadUnits("length");
     toggleOperators(false);
     await loadHistory();
+    window.appState = state;   // ✅ move here
+    window.calculate = calculate;
+    units: []
 });
 
 function attachEventListeners() {
@@ -85,6 +90,17 @@ function attachEventListeners() {
             state.operator = btn.dataset.op;
         });
     });
+
+    // Trigger calculate on input change
+    fromInput.addEventListener("input", () => {
+        state.fromVal = parseFloat(fromInput.value);
+        calculate();
+});
+
+    toInput.addEventListener("input", () => {
+        state.toVal = parseFloat(toInput.value);
+        calculate();
+});
 }
 
 async function loadUnits(type) {
@@ -94,9 +110,11 @@ async function loadUnits(type) {
         showError("No units found for this type.");
         return;
     }
-
+    state.units = units;
     populateDropdown(fromSelect, units);
     populateDropdown(toSelect, units);
+    state.fromUnit = units[0].symbol;
+    state.toUnit = units[1] ? units[1].symbol : units[0].symbol;
 }
 
 function setDefaultActive() {
@@ -117,4 +135,71 @@ function showError(msg) {
 
 function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+async function calculate() {
+    console.log("calculate called", state);
+    // Alternate flow: return early if required fields missing
+
+    if (!state.fromVal || !state.fromUnit) return;
+    if (state.action !== "Comparison" && !state.toUnit) return;
+
+    try {
+        let result, expression;
+
+        if (state.action === "Conversion") {
+            const conv = await getConversion(state.fromUnit, state.toUnit);
+            result = applyConversion(state.fromVal, conv);
+            expression = `${state.fromVal} ${state.fromUnit} → ${state.toUnit}`;
+            showResult(result, state.toUnit);
+
+       } else if (state.action === "Comparison") {
+            if (!state.toVal || !state.toUnit) return;
+
+            let base1, base2;
+
+            if (state.fromUnit === state.toUnit) {
+                base1 = state.fromVal;
+                base2 = state.toVal;
+            } else {
+        // Convert both to fromUnit as common base
+                const conv2 = await getConversion(state.toUnit, state.fromUnit);
+                base1 = state.fromVal;
+                base2 = applyConversion(state.toVal, conv2);
+            }
+
+            result = compareValues(state.fromVal, state.fromUnit, state.toVal, state.toUnit, base1, base2);
+            expression = `${state.fromVal} ${state.fromUnit} vs ${state.toVal} ${state.toUnit}`;
+            showResult(result, "");
+
+        } else {
+            // Arithmetic
+            if (!state.toVal || !state.toUnit) return;
+            if (!state.operator) return;
+
+            // Normalise toVal to fromUnit first
+            const conv = await getConversion(state.toUnit, state.fromUnit);
+            const toValNormalised = applyConversion(state.toVal, conv);
+
+            result = performArithmetic(state.fromVal, toValNormalised, state.operator);
+            expression = `${state.fromVal} ${state.fromUnit} ${state.operator} ${state.toVal} ${state.toUnit}`;
+            showResult(result, state.fromUnit);
+        }
+
+        // Save and refresh history
+        const record = {
+            type: state.type,
+            action: state.action,
+            expression,
+            result,
+            timestamp: new Date().toISOString()
+        };
+
+        await saveHistory(record);
+        renderHistory(await getHistory());
+
+    } catch (e) {
+        console.error("calculate failed:", e);
+        showResult("Error: " + e.message, "");
+    }
 }

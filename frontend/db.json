@@ -77,80 +77,136 @@
     },
     {
       "id": "2",
+      "from": "km",
+      "to": "cm",
+      "factor": 100000,
+      "formula": null
+    },
+    {
+      "id": "3",
+      "from": "m",
+      "to": "km",
+      "factor": 0.001,
+      "formula": null
+    },
+    {
+      "id": "4",
       "from": "m",
       "to": "cm",
       "factor": 100,
       "formula": null
     },
     {
-      "id": "3",
+      "id": "5",
+      "from": "cm",
+      "to": "km",
+      "factor": 0.00001,
+      "formula": null
+    },
+    {
+      "id": "6",
       "from": "cm",
       "to": "m",
       "factor": 0.01,
       "formula": null
     },
     {
-      "id": "4",
+      "id": "7",
       "from": "kg",
       "to": "g",
       "factor": 1000,
       "formula": null
     },
     {
-      "id": "5",
+      "id": "8",
+      "from": "kg",
+      "to": "mg",
+      "factor": 1000000,
+      "formula": null
+    },
+    {
+      "id": "9",
+      "from": "g",
+      "to": "kg",
+      "factor": 0.001,
+      "formula": null
+    },
+    {
+      "id": "10",
       "from": "g",
       "to": "mg",
       "factor": 1000,
       "formula": null
     },
     {
-      "id": "6",
+      "id": "11",
+      "from": "mg",
+      "to": "kg",
+      "factor": 0.000001,
+      "formula": null
+    },
+    {
+      "id": "12",
       "from": "mg",
       "to": "g",
       "factor": 0.001,
       "formula": null
     },
     {
-      "id": "7",
+      "id": "13",
       "from": "l",
       "to": "ml",
       "factor": 1000,
       "formula": null
     },
     {
-      "id": "8",
+      "id": "14",
       "from": "ml",
       "to": "l",
       "factor": 0.001,
       "formula": null
     },
     {
-      "id": "9",
+      "id": "15",
       "from": "C",
       "to": "F",
       "factor": null,
       "formula": "(x*9/5)+32"
     },
     {
-      "id": "10",
+      "id": "16",
       "from": "F",
       "to": "C",
       "factor": null,
       "formula": "(x-32)*5/9"
     },
     {
-      "id": "11",
+      "id": "17",
       "from": "C",
       "to": "K",
       "factor": null,
       "formula": "x+273.15"
     },
     {
-      "id": "12",
+      "id": "18",
       "from": "K",
       "to": "C",
       "factor": null,
       "formula": "x-273.15"
+    },
+    {
+      "id": "19",
+      "from": "F",
+      "to": "K",
+      "factor": null,
+      "formula": "(x-32)*5/9+273.15"
+    },
+    {
+      "id": "20",
+      "from": "K",
+      "to": "F",
+      "factor": null,
+      "formula": "(x-273.15)*9/5+32"
     }
   ],
   "history": [
@@ -193,6 +249,118 @@
       "expression": "5 km → m",
       "result": 5000,
       "timestamp": "2026-03-21T08:13:14.169Z"
+    },
+    {
+      "id": "5a3a",
+      "type": "length",
+      "action": "Conversion",
+      "expression": "2 km → m",
+      "result": 2000,
+      "timestamp": "2026-03-22T14:39:39.473Z"
+    },
+    {
+      "id": "691d",
+      "type": "length",
+      "action": "Conversion",
+      "expression": "2 km → m",
+      "result": 2000,
+      "timestamp": "2026-03-22T14:39:43.117Z"
+    },
+    {
+      "id": "9d08",
+      "type": "length",
+      "action": "Comparison",
+      "expression": "2 km vs 3 km",
+      "result": "2 km is LESS than 3 km",
+      "timestamp": "2026-03-22T14:39:55.198Z"
+    },
+    {
+      "id": "5149",
+      "type": "length",
+      "action": "Conversion",
+      "expression": "1 km → m",
+      "result": 1000,
+      "timestamp": "2026-03-22T14:39:58.087Z"
+    },
+    {
+      "id": "39c9",
+      "type": "length",
+      "action": "Conversion",
+      "expression": "1 km → m",
+      "result": 1000,
+      "timestamp": "2026-03-22T14:39:59.357Z"
+    },
+    {
+      "id": "9595",
+      "type": "length",
+      "action": "Conversion",
+      "expression": "2 km → m",
+      "result": 2000,
+      "timestamp": "2026-03-22T14:40:00.492Z"
+    },
+    {
+      "id": "a041",
+      "type": "length",
+      "action": "Comparison",
+      "expression": "1 km vs 2 km",
+      "result": "1 km is LESS than 2 km",
+      "timestamp": "2026-03-22T14:40:11.969Z"
+    },
+    {
+      "id": "3e2a",
+      "type": "length",
+      "action": "Arithmetic",
+      "expression": "2 km + 3 km",
+      "result": 5,
+      "timestamp": "2026-03-22T14:40:22.907Z"
+    },
+    {
+      "id": "13b4",
+      "type": "length",
+      "action": "Conversion",
+      "expression": "1 km → m",
+      "result": 1000,
+      "timestamp": "2026-03-22T14:42:33.674Z"
+    },
+    {
+      "id": "5ce0",
+      "type": "length",
+      "action": "Conversion",
+      "expression": "1 km → m",
+      "result": 1000,
+      "timestamp": "2026-03-22T14:42:34.633Z"
+    },
+    {
+      "id": "1d33",
+      "type": "length",
+      "action": "Conversion",
+      "expression": "1 km → m",
+      "result": 1000,
+      "timestamp": "2026-03-22T14:42:35.559Z"
+    },
+    {
+      "id": "176b",
+      "type": "length",
+      "action": "Conversion",
+      "expression": "1 km → m",
+      "result": 1000,
+      "timestamp": "2026-03-22T14:42:36.440Z"
+    },
+    {
+      "id": "c27a",
+      "type": "length",
+      "action": "Conversion",
+      "expression": "1 km → m",
+      "result": 1000,
+      "timestamp": "2026-03-22T14:42:37.301Z"
+    },
+    {
+      "id": "a816",
+      "type": "length",
+      "action": "Comparison",
+      "expression": "2 km vs 3 m",
+      "result": "2 km is GREATER than 3 m",
+      "timestamp": "2026-03-22T14:53:12.469Z"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
